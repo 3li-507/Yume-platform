@@ -26,5 +26,4 @@ urlpatterns = [
     path('reviews/', include('reviews.urls', namespace='reviews')),
     path('qr-code/', include('qr_code.urls', namespace='qr_code')),
     path('administration/', include('administration.urls', namespace='administration')),
-    path('hotel-owner/', include('HotelOwner.urls', namespace='HotelOwner')),
 ]

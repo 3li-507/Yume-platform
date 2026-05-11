@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'reviews',
     'qr_code',
     'administration',
-    'HotelOwner',
+    
 ]
 
 MIDDLEWARE = [
