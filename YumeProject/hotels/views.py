@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def hotels(request):
+    return request(200)
