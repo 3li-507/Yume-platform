@@ -3,4 +3,4 @@ from django.http import HttpResponse, HttpRequest
 # Create your views here.
 
 def home_view(request):
-    return HttpResponse("Welcome to the Yume Platform!")
+    return render(request, 'main/home.html')
