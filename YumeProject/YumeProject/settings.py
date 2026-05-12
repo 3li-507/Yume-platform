@@ -125,3 +125,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+AUTH_USER_MODEL = 'accounts.User'
+LOGIN_URL = '/accounts/sign-in/'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

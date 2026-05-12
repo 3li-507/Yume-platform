@@ -1,7 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpRequest
+from django.http import HttpResponse
+from accounts.decorators import admin_role_required
 
-# Create your views here.
 
+@admin_role_required
 def admin_view(request):
-    return request(200)
+    return HttpResponse("Administration panel — coming soon.")

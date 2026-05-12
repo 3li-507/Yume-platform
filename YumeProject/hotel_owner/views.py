@@ -1,7 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpRequest
+from django.http import HttpResponse
+from accounts.decorators import owner_required
 
-# Create your views here.
+
+@owner_required
 def owner_view(request):
-    return request(200)
-
+    return HttpResponse("Owner dashboard — coming soon.")

@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up — Yume{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-sm border-0 rounded-4 p-4 mt-4">
+            <h4 class="text-center mb-4">Create an account</h4>
+
+            <div class="d-flex gap-2 mb-4" id="account-type-toggle">
+                <button type="button" class="btn flex-fill {% if account_type == 'guest' %}btn-dark{% else %}btn-outline-secondary{% endif %}" onclick="switchType('guest')">
+                    <i class="bi bi-person me-1"></i> Guest
+                </button>
+                <button type="button" class="btn flex-fill {% if account_type == 'owner' %}btn-dark{% else %}btn-outline-secondary{% endif %}" onclick="switchType('owner')">
+                    <i class="bi bi-building me-1"></i> Owner
+                </button>
+            </div>
+
+            <form method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                <input type="hidden" name="account_type" id="account_type_input" value="{{ account_type }}">
+
+                {% for field in form %}
+                    {% if field.name not in 'company_name,company_id,company_location' %}
+                    <div class="mb-3">
+                        <label for="{{ field.id_for_label }}" class="form-label fw-semibold">{{ field.label }}</label>
+                        <div class="input-group">
+                            {{ field }}
+                        </div>
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <div class="text-danger small mt-1">{{ error }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                {% endfor %}
+
+                <div id="owner-fields" {% if account_type != 'owner' %}style="display:none"{% endif %}>
+                    {% for field in form %}
+                        {% if field.name in 'company_name,company_id,company_location' %}
+                        <div class="mb-3">
+                            <label for="{{ field.id_for_label }}" class="form-label fw-semibold">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                                {% for error in field.errors %}
+                                    <div class="text-danger small mt-1">{{ error }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger py-2">
+                        {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+                    </div>
+                {% endif %}
+
+                <button type="submit" class="btn btn-dark w-100 mt-2">Create account</button>
+            </form>
+
+            <p class="text-center text-muted small mt-3 mb-0">
+                Already have an account? <a href="{% url 'accounts:sign_in' %}" class="text-dark">Sign in</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function switchType(type) {
+        document.getElementById('account_type_input').value = type;
+        const ownerFields = document.getElementById('owner-fields');
+        const buttons = document.querySelectorAll('#account-type-toggle button');
+
+        if (type === 'owner') {
+            ownerFields.style.display = '';
+            buttons[0].className = 'btn flex-fill btn-outline-secondary';
+            buttons[1].className = 'btn flex-fill btn-dark';
+        } else {
+            ownerFields.style.display = 'none';
+            buttons[0].className = 'btn flex-fill btn-dark';
+            buttons[1].className = 'btn flex-fill btn-outline-secondary';
+        }
+    }
+
+    document.querySelectorAll('#owner-fields input, #owner-fields textarea, #owner-fields select').forEach(el => {
+        el.classList.add('form-control');
+    });
+    document.querySelectorAll('input:not([type=hidden]):not([type=file]):not([type=checkbox]), textarea, select').forEach(el => {
+        el.classList.add('form-control');
+    });
+</script>
+{% endblock %}
