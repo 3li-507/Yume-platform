@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'qr_code',
     'administration',
     
+    
 ]
 
 MIDDLEWARE = [

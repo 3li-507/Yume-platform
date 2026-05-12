@@ -22,6 +22,7 @@ urlpatterns = [
     path('', include('main.urls', namespace='main')),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('hotels/', include('hotels.urls', namespace='hotels')),
+    path('hotel-owner/', include('hotel_owner.urls', namespace='hotel_owner')),
     path('booking/', include('booking.urls', namespace='booking')),
     path('payment/', include('payment.urls', namespace='payment')),
     path('reviews/', include('reviews.urls', namespace='reviews')),
