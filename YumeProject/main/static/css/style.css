@@ -1,0 +1,9 @@
+.container {
+    background-color: #eaeaea;
+    color: #333;
+}
+
+.container.dark {
+    background-color: #333;
+    color: #eaeaea;
+}
