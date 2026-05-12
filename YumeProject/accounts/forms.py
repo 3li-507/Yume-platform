@@ -5,27 +5,28 @@ from django.contrib.auth.forms import UserCreationForm
 User = get_user_model()
 
 
-class GuestSignUpForm(UserCreationForm):
+class CustomerSignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=150, required=True)
     last_name  = forms.CharField(max_length=150, required=True)
     email      = forms.EmailField(required=True)
+    avatar     = forms.ImageField(required=False)
 
     class Meta:
         model  = User
-        fields = ['first_name', 'last_name', 'email', 'username', 'password1', 'password2', 'profile_image']
+        fields = ['first_name', 'last_name', 'email', 'username', 'password1', 'password2']
 
 
 class OwnerSignUpForm(UserCreationForm):
-    first_name       = forms.CharField(max_length=150, required=True)
-    last_name        = forms.CharField(max_length=150, required=True)
-    email            = forms.EmailField(required=True)
-    company_name     = forms.CharField(max_length=200)
-    company_id       = forms.CharField(max_length=100)
-    company_location = forms.CharField(max_length=200)
+    first_name   = forms.CharField(max_length=150, required=True)
+    last_name    = forms.CharField(max_length=150, required=True)
+    email        = forms.EmailField(required=True)
+    company_name = forms.CharField(max_length=200)
+    company_id   = forms.CharField(max_length=100)
+    avatar       = forms.ImageField(required=False)
 
     class Meta:
         model  = User
-        fields = ['first_name', 'last_name', 'email', 'username', 'password1', 'password2', 'profile_image']
+        fields = ['first_name', 'last_name', 'email', 'username', 'password1', 'password2']
 
 
 class SignInForm(forms.Form):
