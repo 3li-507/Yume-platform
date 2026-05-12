@@ -13,9 +13,9 @@
 
 
 </head>
-<body class="container d-flex flex-column min-vh-100 mx-auto p-4 " >
+<body class="container d-flex flex-column min-vh-100 mx-auto p-4 {% if request.COOKIES.mode == 'dark' %}dark{% endif %}">
     <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary d-flex flex-row justify-content-end rounded-pill p-3 mb-4">
+        <nav class="navbar navbar-expand-lg d-flex flex-row justify-content-end rounded-pill p-3 mb-4">
             <div class="container-fluid">
                 <a class="navbar-brand ms-3" href="{% url 'main:home_view' %}"><h3>Yume</h3></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,7 +57,9 @@
             <ul class="nav justify-content-end mb-3 gap-3">
                 <li><a href="{% url 'main:about_view' %}" class="text-decoration-none text-dark">About</a></li>
                 <li><a href="{% url 'main:contact_view' %}" class="text-decoration-none text-dark">Contact</a></li>
+                <li><a href="{% url 'main:services_view' %}" class="text-decoration-none text-dark">Services</a></li>
             </ul>
+            <p class="d-flex flex-column justify-content-center align-items-center translate-middle-x text-muted mb-0" style="font-size: 200px;">Yume</p>
         </div>
     </footer>
 
