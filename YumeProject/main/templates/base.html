@@ -38,7 +38,11 @@
                                     <i class="bi bi-moon-stars-fill"></i>
                                 {% endif %}
                             </a>
-                            <a href="" class="text-decoration-none text-dark"><i class="bi bi-person-circle fs-5"></i></a>
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'accounts:account_view' %}" class="text-decoration-none text-dark"><i class="bi bi-person-circle fs-5"></i></a>
+                            {% else %}
+                            <a href="{% url 'accounts:sign_in' %}" class="text-decoration-none text-dark"><i class="bi bi-person-circle fs-5"></i></a>
+                            {% endif %}
                         </li>
                     </ul>
                 </div>
