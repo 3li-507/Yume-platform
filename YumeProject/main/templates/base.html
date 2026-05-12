@@ -34,9 +34,9 @@
                             <a href="" class="text-decoration-none text-dark"><i class="fi fi-rr-earth-americas "></i></a>
                             <a href="{% url 'main:mode_view' 'toggle' %}?next={{request.path}}" class="theme-toggle-btn fs-5 text-decoration-none text-dark">
                                 {% if request.COOKIES.mode == "dark" %}
-                                    <i class="fi fi-rr-moon"></i>
-                                {% else %}
                                     <i class="fi fi-rr-sun"></i>
+                                {% else %}
+                                    <i class="fi fi-rr-moon"></i>
                                 {% endif %}
                             </a>
                             <a href="" class="text-decoration-none text-dark"><i class="fi fi-rr-user fs-5"></i></a>
@@ -59,7 +59,7 @@
                 <li><a href="{% url 'main:contact_view' %}" class="text-decoration-none text-dark">Contact</a></li>
                 <li><a href="{% url 'main:services_view' %}" class="text-decoration-none text-dark">Services</a></li>
             </ul>
-            <p class="d-flex flex-column justify-content-center align-items-center translate-middle-x text-muted mb-0" style="font-size: 200px;">Yume</p>
+            <p class="d-flex flex-column justify-content-center align-items-center translate-middle-x text-muted" style="font-size: 200px;">Yume</p>
         </div>
     </footer>
 
