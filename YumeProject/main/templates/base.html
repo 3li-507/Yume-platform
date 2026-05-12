@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css">
-    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
 
 </head>
@@ -31,15 +30,15 @@
                 <div class="collapse navbar-collapse d-flex flex-row justify-content-end align-items-center" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item d-flex flex-row gap-3 align-items-center justify-content-end me-3 fs-5">
-                            <a href="" class="text-decoration-none text-dark"><i class="fi fi-rr-earth-americas "></i></a>
+                            <a href="" class="text-decoration-none text-dark"><i class="bi bi-translate"></i></a>
                             <a href="{% url 'main:mode_view' 'toggle' %}?next={{request.path}}" class="theme-toggle-btn fs-5 text-decoration-none text-dark">
                                 {% if request.COOKIES.mode == "dark" %}
-                                    <i class="fi fi-rr-sun"></i>
+                                    <i class="bi bi-brightness-high-fill"></i>
                                 {% else %}
-                                    <i class="fi fi-rr-moon"></i>
+                                    <i class="bi bi-moon-stars-fill"></i>
                                 {% endif %}
                             </a>
-                            <a href="" class="text-decoration-none text-dark"><i class="fi fi-rr-user fs-5"></i></a>
+                            <a href="" class="text-decoration-none text-dark"><i class="bi bi-person-circle fs-5"></i></a>
                         </li>
                     </ul>
                 </div>
