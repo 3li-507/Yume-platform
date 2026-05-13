@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('accounts', '0004_customerprofile_phone_number_ownerprofile_join_date_and_more'),
+        ('accounts', '0003_remove_ownerprofile_company_location_and_more'),
     ]
 
     operations = [
