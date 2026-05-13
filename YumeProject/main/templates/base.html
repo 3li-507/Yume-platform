@@ -23,7 +23,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'main:cities_view' %}">Cities</a>
+                            <a class="nav-link active" href="{% url 'main:cities_view' %}">Cities</a>
                         </li>
                     </ul>
                 </div>
@@ -58,8 +58,12 @@
     </main>
 
     <footer class="container text-center rounded-bottom-0 rounded-5">
+        
         <div class="position-relative overflow-hidden" style="padding-bottom: 300px;">
-            <ul class="nav justify-content-end mt-3 me-3 gap-3">
+            <p class="small opacity-50 mt-4 mb-4 me-3 text-end">
+                © Made in <a href="" class="text-decoration-none text-dark">Tuwaiq Academy</a>
+            </p>
+            <ul class="nav justify-content-end  me-3 gap-3">
                 <li><a href="{% url 'main:about_view' %}" class="text-decoration-none text-dark">About <i class="bi bi-arrow-up-right"></i></a></li>
                 <li><a href="{% url 'main:contact_view' %}" class="text-decoration-none text-dark">Contact <i class="bi bi-arrow-up-right"></i></a></li>
                 <li><a href="{% url 'main:faq_view' %}" class="text-decoration-none text-dark">FAQs <i class="bi bi-arrow-up-right"></i></a></li>
