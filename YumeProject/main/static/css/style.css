@@ -1,3 +1,9 @@
+*{
+    padding: 0;
+    margin: 0;
+
+}
+
 /* =========================
    Light Mode
 ========================= */
@@ -19,7 +25,9 @@ body {
 .navbar-brand,
 footer a,
 .theme-toggle-btn,
-.bi {
+.bi,
+input,
+.form-control{
     color: #111111 !important;
     transition: 0.3s ease;
 }
@@ -28,6 +36,8 @@ footer {
     border-top: 1px solid #0000000d;
     
 }
+
+
 
 
 
@@ -57,7 +67,9 @@ body.dark .nav-link,
 body.dark .navbar-brand,
 body.dark footer a,
 body.dark .theme-toggle-btn,
-body.dark .bi {
+body.dark .bi,
+body.dark input,
+body.dark .form-control {
     color: #f5f5f5 !important;
 }
 
@@ -67,7 +79,7 @@ body.dark .bi {
 body.dark .nav-link:hover,
 body.dark footer a:hover,
 body.dark .theme-toggle-btn:hover {
-    color: #9d7bff !important;
+    color: #ffffff80 !important;
 }
 
 
@@ -130,7 +142,7 @@ body.dark select:focus {
     background-color: #18181b;
     color: white;
     box-shadow: none;
-    border-color: #9d7bff;
+    border-color: #ffffff80;
 }
 
 
