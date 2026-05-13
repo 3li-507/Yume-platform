@@ -13,8 +13,8 @@
 
 </head>
 <body class="d-flex flex-column min-vh-100 mx-auto {% if request.COOKIES.mode == 'dark' %}dark{% endif %}">
-    <header class="mt-4 ms-5 me-5">
-        <nav class="navbar navbar-expand-lg d-flex flex-row justify-content-end rounded-pill p-4 mb-4">
+    <header class="ms-5 me-5">
+        <nav class="navbar navbar-expand-lg d-flex flex-row justify-content-end rounded-top-0 rounded-5 p-4 mb-4">
             <div class="container-fluid">
                 <a class="navbar-brand ms-3" href="{% url 'main:home_view' %}"><h3>Yume</h3></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,7 +23,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'main:home_view' %}">Cities</a>
+                            <a class="nav-link" href="{% url 'main:cities_view' %}">Cities</a>
                         </li>
                     </ul>
                 </div>
@@ -49,14 +49,17 @@
             </div>
         </nav>
     </header>
+    
+    {% include 'main/message.html' %}
+
     <main class="container flex-grow-1 ps-5">
         {% block content %}
         {% endblock %}
     </main>
 
-    <footer class="container text-center border-top">
+    <footer class="container text-center rounded-bottom-0 rounded-5">
         <div class="position-relative overflow-hidden" style="padding-bottom: 300px;">
-            <ul class="nav justify-content-end mt-3 gap-3">
+            <ul class="nav justify-content-end mt-3 me-3 gap-3">
                 <li><a href="{% url 'main:about_view' %}" class="text-decoration-none text-dark">About</a></li>
                 <li><a href="{% url 'main:contact_view' %}" class="text-decoration-none text-dark">Contact</a></li>
                 <li><a href="{% url 'main:services_view' %}" class="text-decoration-none text-dark">Services</a></li>

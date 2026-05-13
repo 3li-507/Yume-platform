@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Message Details{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">
+            Contact Message Details
+        </h1>
+    </div>
+
+    <!-- Message Details -->
+    <div class="row g-4">
+
+        <div class="col-12">
+
+            <div class="d-flex flex-row card border-0 shadow-sm rounded-5 overflow-hidden w-50 mx-auto">
+                <div class="card-body p-4">
+
+                    <!-- Top -->
+                    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-4">
+
+                        <div>
+                            <h4 class="fw-bold mb-1">
+                                {{ message.first_name }} {{ message.last_name }}
+                            </h4>
+
+                            <p class="mb-0 opacity-75">
+                                {{ message.email }}
+                            </p>
+                        </div>
+
+                        <div class="text-end">
+
+                            <span class="badge text-bg-dark rounded-pill px-3 py-2">
+                                {{ message.created_at|date:"M d, Y" }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Subject -->
+                    <div class="mb-4">
+
+                        <h6 class="fw-semibold mb-2">
+                            Subject
+                        </h6>
+
+                        <div class="p-3 rounded-4 border">
+                            {{ message.subject }}
+                        </div>
+
+                    </div>
+
+                    <!-- Message -->
+                    <div>
+
+                        <h6 class="fw-semibold mb-2">
+                            Message
+                        </h6>
+
+                        <div class="p-4 rounded-4 border">
+
+                            <p class="mb-0 lh-lg">
+                                {{ message.message }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex justify-content-end mt-4">
+                        <a href="{% url 'main:contact_view_all' %}" class="text-decoration-none">
+                            <button class="btn btn-outline-dark rounded-pill px-5 py-3 fw-semibold">
+                                Back to Messages
+                            </button>
+                        
+                        </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

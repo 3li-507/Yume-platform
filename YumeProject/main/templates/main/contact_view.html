@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Messages{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row g-4">
+
+        {% for message in messages %}
+
+        <div class="col-12 col-md-6 col-lg-4">
+
+            <div class="card h-100 border-0 shadow-sm rounded-5">
+
+                <div class="card-body p-4">
+
+                    <h5 class="fw-bold mb-1">
+                        {{ message.first_name }} {{ message.last_name }}
+                    </h5>
+
+                    <p class="opacity-75 mb-2">
+                        {{ message.email }}
+                    </p>
+
+                    <div class="mb-3">
+                        <span class="fw-semibold">Subject:</span><br>
+                        <span class="opacity-75">
+                            {{ message.subject }}
+                        </span>
+                    </div>
+
+                    <p class="opacity-75 small">
+                        {{ message.message|truncatechars:100 }}
+                    </p>
+
+                    <a href="{% url 'main:contact_view_detail' message.id %}"
+                       class="btn btn-outline-dark btn-sm rounded-pill mt-3">
+                        View Details
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="col-12 text-center py-5">
+            <h4 class="fw-bold">No Messages Yet</h4>
+            <p class="opacity-75">Messages will appear here.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
