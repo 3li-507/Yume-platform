@@ -35,6 +35,7 @@ class User(AbstractUser):
 class CustomerProfile(models.Model):
     user   = models.OneToOneField('accounts.User', on_delete=models.CASCADE, related_name='customer_profile')
     avatar = models.ImageField(upload_to='profile_images/', blank=True, null=True)
+    phone_number = models.CharField('Phone Number', blank=False,max_length=12)
 
     def __str__(self):
         return f"CustomerProfile({self.user.username})"
@@ -45,6 +46,10 @@ class OwnerProfile(models.Model):
     company_name = models.CharField(max_length=200)
     company_id   = models.CharField(max_length=100)
     avatar       = models.ImageField(upload_to='profile_images/', blank=True, null=True)
+    phone_number = models.CharField('Phone Number', blank=False,max_length=12)
+    join_date    = models.DateTimeField(auto_now_add=True,blank=True, null=True)
+
+
 
     def __str__(self):
         return f"OwnerProfile({self.user.username} — {self.company_name})"
