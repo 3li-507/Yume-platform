@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Yume{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="container-fluid rounded-5 overflow-hidden px-0">
+
+        <!-- Hero -->
+        <section class="text-center d-flex align-items-center justify-content-center py-5 rounded-bottom-5 border-bottom">
+            <div>
+                <h1 class="display-2 fw-bold">Contact Us</h1>
+
+                
+
+                <p class="lead opacity-75 mx-auto" style="max-width:700px; line-height:2;">
+                    Have questions, partnership requests, or feedback?
+                    Reach out to the Yume team and we’ll get back to you as soon as possible.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Content -->
+        <section class="py-5">
+            <div class="container">
+
+                <div class="row g-4 align-items-stretch">
+
+                    <!-- Left Info -->
+                    <div class="col-lg-5">
+                        <div class="border rounded-4 p-4 h-100 ">
+
+                            <h3 class="fw-bold mb-4">Get In Touch</h3>
+
+                            <div class="mb-4">
+                                <h6 class="fw-semibold">Email</h6>
+                                <p class="opacity-75 mb-0">
+                                    support@yume.sa
+                                </p>
+                            </div>
+
+                            <div class="mb-4">
+                                <h6 class="fw-semibold">Phone</h6>
+                                <p class="opacity-75 mb-0">
+                                    +966 50 000 0000
+                                </p>
+                            </div>
+
+                            <div class="mb-4">
+                                <h6 class="fw-semibold">Location</h6>
+                                <p class="opacity-75 mb-0">
+                                    Riyadh, Saudi Arabia
+                                </p>
+                            </div>
+
+                            <div>
+                                <h6 class="fw-semibold">Working Hours</h6>
+                                <p class="opacity-75 mb-0">
+                                    Sunday - Thursday
+                                    <br>
+                                    9:00 AM - 6:00 PM
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Right Form -->
+                    <div class="col-lg-7">
+                        <div class="border rounded-4 p-4 h-100 ">
+
+                            <h3 class="fw-bold mb-4">Send a Message</h3>
+
+                            <form method="POST">
+                                {% csrf_token %}
+
+                                <div class="row g-3 mb-3">
+
+                                    <div class="col-md-6">
+                                        <input type="text"
+                                            name="first_name"
+                                               class="form-control rounded-pill py-3"
+                                               placeholder="First Name">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <input type="text"
+                                               name="last_name"
+                                               class="form-control rounded-pill py-3"
+                                               placeholder="Last Name">
+                                    </div>
+
+                                </div>
+
+                                <div class="mb-3">
+                                    <input type="email"
+                                             name="email"
+                                           class="form-control rounded-pill py-3"
+                                           placeholder="Email Address">
+                                </div>
+
+                                <div class="mb-3">
+                                    <input type="text"
+                                           name="subject"
+                                           class="form-control rounded-pill py-3"
+                                           placeholder="Subject">
+                                </div>
+
+                                <div class="mb-4">
+                                    <textarea class="form-control rounded-4 p-3"
+                                              name="message"
+                                              rows="7"
+                                              placeholder="Write your message..."></textarea>
+                                </div>
+
+                                <button type="submit"
+                                        class="btn btn-outline-dark rounded-pill px-5 py-3 fw-semibold">
+                                    Send Message
+                                </button>
+
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Banner Placeholder -->
+        <section class="pb-5">
+            <div class="container">
+
+
+                <div class="border rounded-4 w-100 d-flex align-items-center justify-content-center"
+                     style="height:320px; min-height:320px;">
+
+                    <div class="text-center opacity-50">
+                        <h4 class="fw-bold">Map / Image Section</h4>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</div>
+
+{% endblock %}

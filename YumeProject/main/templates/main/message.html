@@ -1,0 +1,14 @@
+<div id="flash-container" aria-live="polite" aria-atomic="true">
+    {% if messages %}
+        <div class="flash-overlay">
+            <div class="container">
+                {% for message in messages %}
+                <div class="alert {{ message.tags|default:'alert-info' }} alert-dismissible fade show" role="status">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</div>
