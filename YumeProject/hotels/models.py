@@ -1,10 +1,6 @@
 from django.db import models
 
 # Create your models here.
-
-from django.db import models
-
-
 class City(models.Model):
     name = models.CharField(max_length=100)
     is_active = models.BooleanField(default=True)
@@ -29,7 +25,7 @@ class CapsuleHotel(models.Model):
     )
     city = models.ForeignKey(
         City,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         null=True,
         related_name='hotels'
     )

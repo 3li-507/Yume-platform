@@ -8,41 +8,53 @@ from .models import CustomerProfile, OwnerProfile, GROUP_CUSTOMER, GROUP_OWNER
 
 
 def sign_up(request):
-    account_type = request.POST.get('account_type', request.GET.get('type', 'customer'))
-    is_owner = (account_type == 'owner')
-    FormClass = OwnerSignUpForm if is_owner else CustomerSignUpForm
+    return redirect('accounts:sign_up_guest')
 
+
+def sign_up_guest(request):
     if request.user.is_authenticated:
         return redirect('main:home_view')
 
     if request.method == 'POST':
-        form = FormClass(request.POST, request.FILES)
+        form = CustomerSignUpForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save(commit=False)
-            user.role = GROUP_OWNER if is_owner else GROUP_CUSTOMER
+            user.role = GROUP_CUSTOMER
             user.save()
-            if is_owner:
-                OwnerProfile.objects.create(
-                    user=user,
-                    company_name=form.cleaned_data['company_name'],
-                    company_id=form.cleaned_data['company_id'],
-                    avatar=form.cleaned_data.get('avatar'),
-                )
-            else:
-                CustomerProfile.objects.create(
-                    user=user,
-                    avatar=form.cleaned_data.get('avatar'),
-                )
+            CustomerProfile.objects.create(
+                user=user,
+                avatar=form.cleaned_data.get('avatar'),
+            )
             login(request, user)
             return redirect('main:home_view')
     else:
-        form = FormClass()
+        form = CustomerSignUpForm()
 
-    return render(request, 'accounts/sign_up.html', {
-        'form': form,
-        'is_owner': is_owner,
-        'account_type': account_type,
-    })
+    return render(request, 'accounts/sign_up.html', {'form': form})
+
+
+def sign_up_owner(request):
+    if request.user.is_authenticated:
+        return redirect('main:home_view')
+
+    if request.method == 'POST':
+        form = OwnerSignUpForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.role = GROUP_OWNER
+            user.save()
+            OwnerProfile.objects.create(
+                user=user,
+                company_name=form.cleaned_data['company_name'],
+                company_id=form.cleaned_data['company_id'],
+                avatar=form.cleaned_data.get('avatar'),
+            )
+            login(request, user)
+            return redirect('main:home_view')
+    else:
+        form = OwnerSignUpForm()
+
+    return render(request, 'accounts/sign_up_company.html', {'form': form})
 
 
 def sign_in(request):
