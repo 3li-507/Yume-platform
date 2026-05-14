@@ -27,7 +27,7 @@
                 {% if user.is_owner %}
                 <li class="nav-item" role="presentation">
                     <button class="nav-link w-100 text-start" data-bs-toggle="tab" data-bs-target="#properties" type="button" role="tab">
-                        <i class="bi bi-building me-2"></i>Properties
+                        <i class="bi bi-building me-2"></i>Hotels
                     </button>
                 </li>
                 {% endif %}
@@ -77,7 +77,11 @@
                         <li class="list-group-item d-flex justify-content-between">
                             <span class="text-muted">Phone</span>
                             {# TODO: user.customer_profile.phone_number or user.owner_profile.phone_number #}
-                            <span class="text-muted fst-italic">Not set</span>
+                            {% if user.is_owner %}
+                                <span>{{ user.owner_profile.phone_number }}</span>
+                            {% else %}
+                            <span class="text-muted fst-italic">{{ user.customer_profile.phone_number}}</span>
+                            {% endif %}
                         </li>
                         {% if user.is_owner %}
                         <li class="list-group-item d-flex justify-content-between">
@@ -100,6 +104,12 @@
                         <i class="bi bi-building me-1"></i> Owner Dashboard
                     </a>
                     {% endif %}
+                    {% if user.is_admin_role %}
+                    <a href = "#" class="btn btn-outline-dark w-100 mt-3">
+                        <i class="bi bi-shield-lock me-1"></i> Admin Dashboard (coming soon)
+                    </a>
+                    
+                    {% endif %}
                 </div>
 
                 <!-- Bookings pane -->
@@ -118,9 +128,18 @@
                 <div class="tab-pane fade" id="settings" role="tabpanel">
                     <h6 class="fw-semibold mb-3">Account Settings</h6>
                     {# TODO: profile edit form goes here #}
-                    <div class="text-center text-muted py-5">
-                        <i class="bi bi-sliders" style="font-size:2.5rem;"></i>
-                        <p class="mt-2 mb-0">Settings coming soon</p>
+                    <div class="list list-group list-group-flush text-muted py-5">
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="bi bi-gear-wide-connected me-2"></i>Edit Profile (coming soon)
+                        </a>
+                         <a href="#" class="list-group-item list-group-item-action">
+                            <i class="bi bi-gear-wide-connected me-2"></i>change password (coming soon)
+                        </a>
+                        {% if user.is_admin_role%}
+                        <a href = "{% url 'admin:index' %}" class="btn btn-outline-dark w-100 mt-2">
+                            <i class="bi bi-shield-lock me-1"></i> Django Admin
+                        </a>
+                        {% endif %}
                     </div>
                 </div>
 
