@@ -46,7 +46,7 @@ def sign_up_owner(request):
             OwnerProfile.objects.create(
                 user=user,
                 company_name=form.cleaned_data['company_name'],
-                company_id=form.cleaned_data['company_id'],
+                commercial_reg=form.cleaned_data['commercial_reg'],
                 avatar=form.cleaned_data.get('avatar'),
             )
             login(request, user)
@@ -56,6 +56,13 @@ def sign_up_owner(request):
 
     return render(request, 'accounts/sign_up_company.html', {'form': form})
 
+#TODO:
+def edit_profile(request):
+    if request.method == 'POST':
+        pass
+
+def company_profile_view(request):
+    return render(request, 'accounts/company_profile.html',)
 
 def sign_in(request):
     if request.user.is_authenticated:

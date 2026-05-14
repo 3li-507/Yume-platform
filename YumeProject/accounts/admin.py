@@ -29,5 +29,5 @@ class CustomerProfileAdmin(admin.ModelAdmin):
 
 @admin.register(OwnerProfile)
 class OwnerProfileAdmin(admin.ModelAdmin):
-    list_display  = ('user', 'company_name', 'company_id', 'avatar')
-    search_fields = ('user__username', 'user__email', 'company_name', 'company_id')
+    list_display  = ('user', 'company_name', 'commercial_reg', 'avatar')
+    search_fields = ('user__username', 'user__email', 'company_name', 'commercial_reg')

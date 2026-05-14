@@ -3,59 +3,144 @@
 {% block title %}My Account — Yume{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <!-- side bar section -->
-     <div class="col-md-6 col-lg-3">
-        <div class="card shadow-sm border-0 rounded-4 p-4 mt-4">
+<div class="row justify-content-center mt-4 gap-3">
+
+    <!-- Sidebar nav -->
+    <div class="col-md-4 col-lg-3">
+        <div class="card shadow-sm border-0 rounded-4 p-3">
+            <ul class="nav nav-pills dark flex-column gap-1" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active w-100 text-start" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab">
+                        <i class="bi bi-person me-2"></i>Profile
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link w-100 text-start" data-bs-toggle="tab" data-bs-target="#bookings" type="button" role="tab">
+                        <i class="bi bi-calendar-check me-2"></i>Bookings
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link w-100 text-start" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab">
+                        <i class="bi bi-gear me-2"></i>Settings
+                    </button>
+                </li>
+                {% if user.is_owner %}
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link w-100 text-start" data-bs-toggle="tab" data-bs-target="#properties" type="button" role="tab">
+                        <i class="bi bi-building me-2"></i>Properties
+                    </button>
+                </li>
+                {% endif %}
+            </ul>
+
+            <hr class="my-3">
+
+            <form method="post" action="{% url 'accounts:sign_out' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-dark w-100 btn-sm">
+                    <i class="bi bi-box-arrow-right me-1"></i> Sign out
+                </button>
+            </form>
         </div>
     </div>
-    <!-- account info section-->
-    <div class="col-md-6 col-lg-6">
-        <div class="card shadow-sm border-0 rounded-4 p-4 mt-4">
 
+    <!-- Tab content -->
+    <div class="col-md-7 col-lg-6">
+        <div class="card shadow-sm border-0 rounded-4 p-4">
+
+            <!-- Always-visible header -->
             <div class="text-center mb-4">
                 {% if user.is_owner and user.owner_profile.avatar %}
                     <img src="{{ user.owner_profile.avatar.url }}" alt="Profile" class="rounded-circle mb-3" width="80" height="80" style="object-fit:cover;">
                 {% elif user.is_customer and user.customer_profile.avatar %}
                     <img src="{{ user.customer_profile.avatar.url }}" alt="Profile" class="rounded-circle mb-3" width="80" height="80" style="object-fit:cover;">
                 {% else %}
-                    <i class="bi bi-person-circle" style="font-size:5rem;"></i>
+                    <i class="bi bi-person-circle" style="font-size:4rem;"></i>
                 {% endif %}
                 <h5 class="mb-0">{{ user.get_full_name|default:user.username }}</h5>
                 <span class="badge bg-secondary mt-1">{{ user.get_role_display }}</span>
             </div>
 
-            <ul class="list-group list-group-flush mb-4">
-                <li class="list-group-item d-flex justify-content-between">
-                    <span class="text-muted">Username</span>
-                    <span>{{ user.username }}</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between">
-                    <span class="text-muted">Email</span>
-                    <span>{{ user.email }}</span>
-                </li>
+            <div class="tab-content">
+
+                <!-- Profile pane -->
+                <div class="tab-pane fade show active" id="profile" role="tabpanel">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-muted">Username</span>
+                            <span>{{ user.username }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-muted">Email</span>
+                            <span>{{ user.email }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-muted">Phone</span>
+                            {# TODO: user.customer_profile.phone_number or user.owner_profile.phone_number #}
+                            <span class="text-muted fst-italic">Not set</span>
+                        </li>
+                        {% if user.is_owner %}
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-muted">Company</span>
+                            <span>{{ user.owner_profile.company_name }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-muted">Commercial Reg.</span>
+                            <span>{{ user.owner_profile.commercial_reg }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-muted">Member since</span>
+                            <span>{{ user.owner_profile.created_at|date:"M Y" }}</span>
+                        </li>
+                        {% endif %}
+                    </ul>
+
+                    {% if user.is_owner %}
+                    <a href="{% url 'hotel_owner:owner_view' %}" class="btn btn-outline-dark w-100 mt-3">
+                        <i class="bi bi-building me-1"></i> Owner Dashboard
+                    </a>
+                    {% endif %}
+                </div>
+
+                <!-- Bookings pane -->
+                <div class="tab-pane fade" id="bookings" role="tabpanel">
+                    <h6 class="fw-semibold mb-3">Your Bookings</h6>
+                    {# TODO: {% for booking in bookings %} #}
+                    <div class="text-center text-muted py-5">
+                        <i class="bi bi-calendar-x" style="font-size:2.5rem;"></i>
+                        <p class="mt-2 mb-0">No bookings yet</p>
+                        {# TODO: replace placeholder with booking cards #}
+                    </div>
+                    {# TODO: {% endfor %} #}
+                </div>
+
+                <!-- Settings pane -->
+                <div class="tab-pane fade" id="settings" role="tabpanel">
+                    <h6 class="fw-semibold mb-3">Account Settings</h6>
+                    {# TODO: profile edit form goes here #}
+                    <div class="text-center text-muted py-5">
+                        <i class="bi bi-sliders" style="font-size:2.5rem;"></i>
+                        <p class="mt-2 mb-0">Settings coming soon</p>
+                    </div>
+                </div>
+
+                <!-- Properties pane (owner only) -->
                 {% if user.is_owner %}
-                    <li class="list-group-item d-flex justify-content-between">
-                        <span class="text-muted">Company</span>
-                        <span>{{ user.owner_profile.company_name }}</span>
-                    </li>
+                <div class="tab-pane fade" id="properties" role="tabpanel">
+                    <h6 class="fw-semibold mb-3">Your Properties</h6>
+                    {# TODO: {% for property in properties %} #}
+                    <div class="text-center text-muted py-5">
+                        <i class="bi bi-houses" style="font-size:2.5rem;"></i>
+                        <p class="mt-2 mb-0">No properties listed yet</p>
+                        {# TODO: replace placeholder with property cards #}
+                    </div>
+                    {# TODO: {% endfor %} #}
+                </div>
                 {% endif %}
-            </ul>
 
-            {% if user.is_owner %}
-                <a href="{% url 'hotel_owner:owner_view' %}" class="btn btn-outline-dark w-100 mb-2">
-                    <i class="bi bi-building me-1"></i> Owner Dashboard
-                </a>
-            {% endif %}
-
-            <form method="post" action="{% url 'accounts:sign_out' %}">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-dark w-100">
-                    <i class="bi bi-box-arrow-right me-1"></i> Sign out
-                </button>
-            </form>
+            </div>
         </div>
     </div>
-    
+
 </div>
 {% endblock %}

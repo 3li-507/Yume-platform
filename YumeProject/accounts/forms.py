@@ -28,7 +28,7 @@ class OwnerSignUpForm(UserCreationForm):
     last_name    = forms.CharField(max_length=150, required=True)
     email        = forms.EmailField(required=True)
     company_name = forms.CharField(max_length=200)
-    company_id   = forms.CharField(max_length=100)
+    commercial_reg = forms.CharField(max_length=100)
     avatar       = forms.ImageField(required=False)
     phone_number = forms.CharField(required=True,validators=[phone_validator])
 
