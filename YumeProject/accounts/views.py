@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -61,8 +61,9 @@ def edit_profile(request):
     if request.method == 'POST':
         pass
 
-def company_profile_view(request):
-    return render(request, 'accounts/company_profile.html',)
+def public_profile_view(request, username):
+    profile = get_object_or_404(OwnerProfile, user__username=username, user__role=GROUP_OWNER)
+    return render(request, 'accounts/company_profile.html', {'profile': profile})
 
 def sign_in(request):
     if request.user.is_authenticated:
