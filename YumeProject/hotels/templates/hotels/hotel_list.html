@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Hotels{% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+    <!-- ── Sidebar Filters ── -->
+    <div class="col-3">
+        <h5>Filters</h5>
+        <hr>
+
+        <!-- City Filter -->
+        <div class="mb-4">
+            <h6>City</h6>
+            {% for city in cities %}
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="city" value="{{ city.id }}" id="city_{{ city.id }}">
+                <label class="form-check-label" for="city_{{ city.id }}">
+                    {{ city.name }}
+                </label>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Booking Type Filter -->
+        <div class="mb-4">
+            <h6>Booking Type</h6>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="booking_type" value="hour" id="type_hour">
+                <label class="form-check-label" for="type_hour">Hourly</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="booking_type" value="night" id="type_night">
+                <label class="form-check-label" for="type_night">Nightly</label>
+            </div>
+        </div>
+
+        <!-- Price Filter -->
+        <div class="mb-4">
+            <h6>Price Range</h6>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="price" value="low" id="price_low">
+                <label class="form-check-label" for="price_low">Under 100 SAR</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="price" value="mid" id="price_mid">
+                <label class="form-check-label" for="price_mid">100 - 300 SAR</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="price" value="high" id="price_high">
+                <label class="form-check-label" for="price_high">Above 300 SAR</label>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ── Hotel Cards ── -->
+    <div class="col-9">
+
+        <!-- Search Bar -->
+        <div class="mb-4">
+            <form method="GET">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="q" placeholder="Search hotels..." value="{{ request.GET.q }}">
+                    <button class="btn btn-dark" type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Results Count -->
+        <p>{{ hotels.count }} hotels found</p>
+
+        <!-- Cards -->
+        {% for hotel in hotels %}
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-4">
+                    <img src="{{ hotel.image.url }}" class="img-fluid rounded-start h-100 object-fit-cover" alt="{{ hotel.name }}">
+                </div>
+                <div class="col-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ hotel.name }}</h5>
+                        <p class="card-text text-muted">{{ hotel.city.name }}</p>
+                        <p class="card-text">{{ hotel.description|truncatewords:20 }}</p>
+
+                        <!-- Rating -->
+                        <div class="d-flex align-items-center gap-1 mb-2">
+                            {% for i in "12345" %}
+                                {% if forloop.counter <= hotel.rating %}
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                {% else %}
+                                    <i class="bi bi-star text-warning"></i>
+                                {% endif %}
+                            {% endfor %}
+                            <small class="text-muted">({{ hotel.rating }})</small>
+                        </div>
+
+                        <!-- Price -->
+                        <p class="card-text">
+                            <small>From</small>
+                            <strong>{{ hotel.capsules.first.hour_price }} SAR</strong>
+                            <small>/ hour</small>
+                        </p>
+
+                        <a href="{% url 'hotels:hotel_detail' hotel.pk %}" class="btn btn-dark">View Hotel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="text-center mt-5">
+            <i class="bi bi-building-x fs-1"></i>
+            <p class="mt-2">No hotels found.</p>
+        </div>
+        {% endfor %}
+
+        <!-- Pagination -->
+        {% if hotels.has_other_pages %}
+        <nav class="mt-4">
+            <ul class="pagination justify-content-center">
+                {% if hotels.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ hotels.previous_page_number }}">Previous</a>
+                </li>
+                {% endif %}
+                {% for num in hotels.paginator.page_range %}
+                <li class="page-item {% if hotels.number == num %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endfor %}
+                {% if hotels.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ hotels.next_page_number }}">Next</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}
