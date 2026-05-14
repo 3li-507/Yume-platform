@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Terms & Privacy{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h1 class="display-4 fw-bold">
+            Terms & Privacy
+        </h1>
+
+        <p class="lead opacity-75 mx-auto" style="max-width:700px; line-height:2;">
+            Please review our terms of service and privacy policy before using Yume.
+        </p>
+
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Terms -->
+        <div class="col-lg-6">
+
+            <div class="card border rounded-5 h-100 bg-transparent">
+
+                <div class="card-body p-5">
+
+                    <h2 class="fw-bold mb-4">
+                        Terms of Service
+                    </h2>
+
+                    <p class="opacity-75 lh-lg">
+                        By using Yume, you agree to comply with our booking policies, platform rules, and hospitality standards.
+                    </p>
+
+                    <ul class="opacity-75 lh-lg">
+                        <li>Users must provide accurate booking information.</li>
+                        <li>Payments are securely processed through approved gateways.</li>
+                        <li>Yume reserves the right to cancel suspicious reservations.</li>
+                        <li>Users are responsible for complying with hotel policies.</li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Privacy -->
+        <div class="col-lg-6">
+
+            <div class="card border rounded-5 h-100 bg-transparent">
+
+                <div class="card-body p-5">
+
+                    <h2 class="fw-bold mb-4">
+                        Privacy Policy
+                    </h2>
+
+                    <p class="opacity-75 lh-lg">
+                        Yume values user privacy and protects personal information using secure technologies and modern security standards.
+                    </p>
+
+                    <ul class="opacity-75 lh-lg">
+                        <li>User information is securely stored.</li>
+                        <li>Payment details are encrypted.</li>
+                        <li>We do not sell personal data to third parties.</li>
+                        <li>Users may request account or data deletion.</li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

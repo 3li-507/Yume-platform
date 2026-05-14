@@ -1,3 +1,9 @@
+*{
+    padding: 0;
+    margin: 0;
+
+}
+
 /* =========================
    Light Mode
 ========================= */
@@ -19,8 +25,19 @@ body {
 .navbar-brand,
 footer a,
 .theme-toggle-btn,
-.bi {
+.bi,
+input,
+.form-control,
+i {
     color: #111111 !important;
+    transition: 0.3s ease;
+}
+
+button,
+.btn {
+    background-color: transparent;
+    border: 1px solid #111111;
+    color: #111111;
     transition: 0.3s ease;
 }
 
@@ -28,6 +45,16 @@ footer {
     border-top: 1px solid #0000000d;
     
 }
+
+i:hover,
+.nav-link:hover,
+footer a:hover,
+.theme-toggle-btn:hover {
+    color: #11111180 !important;
+}
+
+
+
 
 
 
@@ -57,8 +84,18 @@ body.dark .nav-link,
 body.dark .navbar-brand,
 body.dark footer a,
 body.dark .theme-toggle-btn,
-body.dark .bi {
+body.dark .bi,
+body.dark input,
+body.dark .form-control,
+body.dark i {
     color: #f5f5f5 !important;
+}
+
+body.dark button,
+body.dark .btn {
+    background-color: transparent;
+    border: 1px solid rgb(255, 255, 255);
+    color: white;
 }
 
 
@@ -66,9 +103,14 @@ body.dark .bi {
 
 body.dark .nav-link:hover,
 body.dark footer a:hover,
-body.dark .theme-toggle-btn:hover {
-    color: #9d7bff !important;
+body.dark .theme-toggle-btn:hover,
+body.dark .bi:hover,
+body.dark input:hover,
+body.dark .form-control:hover,
+body.dark i:hover {
+    color: #ffffff80 !important;
 }
+
 
 
 /* Footer */
@@ -124,13 +166,19 @@ body.dark .btn:hover {
     color: #141414;
 }
 
+body.dark .text-transparent {
+    color: white !important;
+}
+
+
+
 body.dark input:focus,
 body.dark textarea:focus,
 body.dark select:focus {
     background-color: #18181b;
     color: white;
     box-shadow: none;
-    border-color: #9d7bff;
+    border-color: #ffffff80;
 }
 
 

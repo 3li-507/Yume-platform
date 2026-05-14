@@ -4,6 +4,9 @@ from django.contrib import messages
 from .models import Contact
 # Create your views here.
 
+def error_404_view(request: HttpRequest, exception=None):
+    return render(request, '404.html', status=404)
+
 def home_view(request: HttpRequest):
 
     return render(request, 'main/home.html')
@@ -36,8 +39,14 @@ def contact_view_detail(request: HttpRequest, contact_id):
     message_detail = get_object_or_404(Contact, id=contact_id)
     return render(request, 'main/contact_details.html', {'message': message_detail})
 
+def faq_view(request: HttpRequest):
+    return render(request, 'main/faq.html')
+
 def services_view(request: HttpRequest):
     return render(request, 'main/services.html')
+
+def terms_privacy_view(request: HttpRequest):
+    return render(request, 'main/terms_privacy.html')
 
 def cities_view(request: HttpRequest):
     return render(request, 'main/cities.html')

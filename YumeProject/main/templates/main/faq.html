@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}FAQs{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h1 class="display-3 fw-bold">
+            FAQs
+        </h1>
+
+        <p class="lead opacity-75 mx-auto" style="max-width:700px;">
+            Everything you need to know about Yume and capsule hotel stays.
+        </p>
+
+    </div>
+
+    <div class="row g-4">
+
+    <!-- FAQ ITEM -->
+    <div class="col-12">
+
+        <div class="card border rounded-5 shadow-sm overflow-hidden">
+
+            <button class="btn bg-transparent text-transparent text-start p-4 border-0 shadow-none "
+                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <h5 class="fw-bold mb-1">
+                            What is a capsule hotel?
+                        </h5>
+                    </div>
+
+                    <div class="fs-3">
+                        <i class="bi bi-chevron-down fs-5 btn-toggle"></i>
+                    </div>
+
+                </div>
+
+            </button>
+
+            <div id="collapseOne" class="collapse show" >
+
+                <div class="px-4 pb-4">
+
+                    <div class="border-top pt-4">
+
+                        <p class="opacity-75 lh-lg mb-0">
+
+                            Capsule hotels are compact smart accommodations
+                            designed for affordability, comfort, and privacy
+                            for modern travelers.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FAQ ITEM -->
+    <div class="col-12">
+
+        <div class="card border rounded-5 shadow-sm overflow-hidden">
+
+            <button class="btn bg-transparent text-transparent text-start p-4 border-0 shadow-none"
+                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <h5 class="fw-bold mb-1">
+                            Is Yume available across Saudi Arabia?
+                        </h5>
+                    </div>
+
+                    <div class="fs-3">
+                        <i class="bi bi-chevron-down fs-5"></i>
+                    </div>
+
+                </div>
+
+            </button>
+
+            <div id="collapseTwo" class="collapse">
+
+                <div class="px-4 pb-4">
+
+                    <div class="border-top pt-4">
+
+                        <p class="opacity-75 lh-lg mb-0">
+
+                            Yume currently starts in Riyadh with future
+                            expansion plans across major Saudi cities.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FAQ ITEM -->
+    <div class="col-12">
+
+        <div class="card border rounded-5 shadow-sm overflow-hidden">
+
+            <button class="btn bg-transparent text-transparent text-start p-4 border-0 shadow-none"
+                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <h5 class="fw-bold mb-1">
+                            Can I book hourly stays?
+                        </h5>
+                    </div>
+
+                    <div class="fs-3">
+                        <i class="bi bi-chevron-down fs-5"></i>
+                    </div>
+
+                </div>
+
+            </button>
+
+            <div id="collapseThree" class="collapse">
+
+                <div class="px-4 pb-4">
+
+                    <div class="border-top pt-4">
+
+                        <p class="opacity-75 lh-lg mb-0">
+
+                            Yes, selected capsule hotels support hourly
+                            reservations for short stays and transit travelers.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FAQ ITEM -->
+    <div class="col-12">
+
+        <div class="card border rounded-5 shadow-sm overflow-hidden">
+
+            <button class="btn bg-transparent text-transparent text-start p-4 border-0 shadow-none"
+                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <h5 class="fw-bold mb-1">
+                            Are capsule hotels private?
+                        </h5>
+                    </div>
+
+                    <div class="fs-3">
+                        <i class="bi bi-chevron-down fs-5"></i>
+                    </div>
+
+                </div>
+
+            </button>
+
+            <div id="collapseFour" class="collapse">
+
+                <div class="px-4 pb-4">
+
+                    <div class="border-top pt-4">
+
+                        <p class="opacity-75 lh-lg mb-0">
+
+                            Each capsule is designed with secure access
+                            and privacy-focused interiors for solo travelers.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
