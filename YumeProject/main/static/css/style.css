@@ -41,6 +41,11 @@ button,
     transition: 0.3s ease;
 }
 
+.bi-search,
+.bi-search:hover {
+    color: #ffffff !important;
+}
+
 footer {
     border-top: 1px solid #0000000d;
     
@@ -87,17 +92,23 @@ body.dark .theme-toggle-btn,
 body.dark .bi,
 body.dark input,
 body.dark .form-control,
-body.dark i {
+body.dark i,
+body.dark .bi-search {
     color: #f5f5f5 !important;
 }
 
 body.dark button,
-body.dark .btn {
+body.dark .btn,
+body.dark #profile .list-group-item {
     background-color: transparent;
-    border: 1px solid rgb(255, 255, 255);
+    border: 1px solid #f5f5f5;
     color: white;
 }
 
+
+body.dark .text-muted {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
 
 /* Hover */
 
@@ -131,7 +142,7 @@ body.dark footer p {
 
 body.dark .card,
 body.dark .container-fluid {
-    background-color: transparent;
+    background-color: #1a1a1a;
     color: #f5f5f5;
 }
 
@@ -199,4 +210,3 @@ body.dark::-webkit-scrollbar-thumb {
     background: #2d2d31;
     border-radius: 10px;
 }
-
