@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if form.instance.pk %}Edit Capsule{% else %}Add Capsules{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-6">
+
+        <h2>
+            {% if form.instance.pk %}
+                Edit Capsule — {{ form.instance.capsule_num }}
+            {% else %}
+                Add Capsules to {{ hotel.name }}
+            {% endif %}
+        </h2>
+        <hr>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <!-- Capsule Count (only on create) -->
+            {% if not form.instance.pk %}
+            <div class="mb-3">
+                <label class="form-label">Number of Capsules</label>
+                <input type="number" name="capsule_count" class="form-control"
+                    min="1" max="100" value="1"
+                    placeholder="How many capsules?">
+                {% if form.capsule_count.errors %}
+                    <div class="text-danger small">{{ form.capsule_count.errors }}</div>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            <!-- Hour Price -->
+            <div class="mb-3">
+                <label class="form-label">Price per Hour (SAR)</label>
+                <input type="number" name="hour_price" class="form-control"
+                    step="0.01" min="0"
+                    value="{{ form.hour_price.value|default:'' }}"
+                    placeholder="e.g. 50">
+                {% if form.hour_price.errors %}
+                    <div class="text-danger small">{{ form.hour_price.errors }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Night Price -->
+            <div class="mb-3">
+                <label class="form-label">Price per Night (SAR)</label>
+                <input type="number" name="night_price" class="form-control"
+                    step="0.01" min="0"
+                    value="{{ form.night_price.value|default:'' }}"
+                    placeholder="e.g. 200">
+                {% if form.night_price.errors %}
+                    <div class="text-danger small">{{ form.night_price.errors }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-dark">
+                    {% if form.instance.pk %}Save Changes{% else %}Add Capsules{% endif %}
+                </button>
+                <a href="{% url 'hotel_owner:capsule_list' hotel.pk %}" class="btn btn-outline-dark">
+                    Cancel
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

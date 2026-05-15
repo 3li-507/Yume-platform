@@ -70,29 +70,53 @@
 <div class="mb-4" id="capsules">
     <h5>Available Capsules</h5>
     <hr>
-    <div class="row">
-        {% for capsule in capsules %}
-        <div class="col-3 mb-3">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h6 class="card-title">
-                        <i class="bi bi-door-closed"></i> {{ capsule.capsule_num }}
-                    </h6>
-                    <p class="card-text">
-                        <i class="bi bi-clock"></i> {{ capsule.hour_price }} SAR / hour
-                    </p>
-                    <p class="card-text">
-                        <i class="bi bi-moon"></i> {{ capsule.night_price }} SAR / night
-                    </p>
-                    <a href="#" class="btn btn-dark btn-sm w-100">Book</a>
-                </div>
+
+    {% if capsules %}
+    <div class="card">
+        <div class="card-body d-flex justify-content-between align-items-center">
+            
+            <!-- Available Count -->
+            <div>
+                <h6 class="mb-0">Available Capsules</h6>
+                <p class="text-muted mb-0">{{ capsules.count }} capsules ready</p>
             </div>
+
+            <!-- Price -->
+            <div class="text-center">
+                <p class="mb-0"><strong>{{ capsules.first.hour_price }} SAR</strong> / hour</p>
+                <p class="mb-0"><strong>{{ capsules.first.night_price }} SAR</strong> / night</p>
+            </div>
+
+            <!-- Counter + Book -->
+            <div class="d-flex align-items-center gap-3">
+                <div class="d-flex align-items-center gap-2">
+                    <button class="btn btn-outline-dark btn-sm" id="decrease">-</button>
+                    <span id="quantity">1</span>
+                    <button class="btn btn-outline-dark btn-sm" id="increase">+</button>
+                </div>
+                <a href="#" class="btn btn-dark">Book</a>
+            </div>
+
         </div>
-        {% empty %}
-        <p class="text-muted">No capsules available at the moment.</p>
-        {% endfor %}
     </div>
+    {% else %}
+    <p class="text-muted">No capsules available at the moment.</p>
+    {% endif %}
+
 </div>
+
+<script>
+    const max = {{ capsules_count }};
+    let qty = 1;
+
+    document.getElementById('increase').addEventListener('click', () => {
+        if (qty < max) { qty++; document.getElementById('quantity').innerText = qty; }
+    });
+
+    document.getElementById('decrease').addEventListener('click', () => {
+        if (qty > 1) { qty--; document.getElementById('quantity').innerText = qty; }
+    });
+</script>
 
 <!-- ── Reviews ── -->
 <div class="mb-4">

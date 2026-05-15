@@ -1,35 +1,127 @@
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse,HttpRequest
 from accounts.decorators import owner_required
+from hotels.models import CapsuleHotel, Capsule
+from .forms import CapsuleHotelForm, CapsuleForm
 
 
-@owner_required
-def owner_view(request):
-    return HttpResponse("Owner dashboard — coming soon.")
+
+
+# @owner_required
+# def owner_view(request):
+#     return HttpResponse("Owner dashboard — coming soon.")
+
+# ── Hotel Views ──
 
 # Hotel Owner
 def hotel_create(request):
-    pass
+    if request.method == 'POST':
+        form = CapsuleHotelForm(request.POST, request.FILES)
+        if form.is_valid():
+            hotel = form.save(commit=False)
+            hotel.hotel_owner = request.user.owner_profile
+            hotel.is_active = False  # waiting for admin approval
+            hotel.save()
+            return redirect('hotel_owner:hotel_pending')
+    else:
+        form = CapsuleHotelForm()
+    return render(request, 'hotel_owner/hotel_form.html', {'form': form})
+
+
+# Hotel Owner
+def hotel_pending(request):
+    hotels = CapsuleHotel.objects.filter(
+        hotel_owner=request.user.owner_profile
+    )
+    return render(request, 'hotel_owner/hotel_pending.html', {'hotels': hotels})
+
 
 # Hotel Owner
 def hotel_update(request, pk):
-    pass
+    hotel = get_object_or_404(CapsuleHotel, pk=pk)
+    if request.method == 'POST':
+        form = CapsuleHotelForm(request.POST, request.FILES, instance=hotel)
+        if form.is_valid():
+            form.save()
+            return redirect('hotel_owner:hotel_pending')
+    else:
+        form = CapsuleHotelForm(instance=hotel)
+    return render(request, 'hotel_owner/hotel_form.html', {'form': form})
+
 
 # Hotel Owner
 def hotel_delete(request, pk):
-    pass
+    hotel = get_object_or_404(CapsuleHotel, pk=pk)
+    if request.method == 'POST':
+        hotel.delete()
+        return redirect('hotel_owner:hotel_pending')
+    return render(request, 'hotel_owner/hotel_confirm_delete.html', {'hotel': hotel})
+
+
+# ── Capsule Views ──
 
 # Hotel Owner
 def capsule_list(request, hotel_pk):
-    pass
+    hotel = get_object_or_404(CapsuleHotel, pk=hotel_pk)
+    capsules = hotel.capsules.all()
+    return render(request, 'hotel_owner/capsule_list.html', {
+        'hotel': hotel,
+        'capsules': capsules,
+        'available_count': capsules.filter(is_available=True).count(),
+        'booked_count': capsules.filter(is_available=False).count(),
+    })
+
 
 # Hotel Owner
 def capsule_create(request, hotel_pk):
-    pass
+    hotel = get_object_or_404(CapsuleHotel, pk=hotel_pk)
+    if request.method == 'POST':
+        form = CapsuleForm(request.POST)
+        if form.is_valid():
+            count = form.cleaned_data['capsule_count']
+            hour_price = form.cleaned_data['hour_price']
+            night_price = form.cleaned_data['night_price']
+
+            existing_count = Capsule.objects.filter(hotel=hotel).count()
+            for i in range(1, count + 1):
+                Capsule.objects.create(
+                    hotel=hotel,
+                    capsule_num=f"{hotel.id}-{existing_count + i}",
+                    hour_price=hour_price,
+                    night_price=night_price,
+                )
+            return redirect('hotel_owner:capsule_list', hotel_pk=hotel_pk)
+    else:
+        form = CapsuleForm()
+    return render(request, 'hotel_owner/capsule_form.html', {
+        'form': form,
+        'hotel': hotel,
+    })
+
 
 # Hotel Owner
 def capsule_update(request, pk):
-    pass
+    capsule = get_object_or_404(Capsule, pk=pk)
+    if request.method == 'POST':
+        form = CapsuleForm(request.POST, instance=capsule)
+        if form.is_valid():
+            form.save()
+            return redirect('hotel_owner:capsule_list', hotel_pk=capsule.hotel.pk)
+    else:
+        form = CapsuleForm(instance=capsule)
+    return render(request, 'hotel_owner/capsule_form.html', {
+        'form': form,
+        'hotel': capsule.hotel,
+    })
+
 
 # Hotel Owner
 def capsule_delete(request, pk):
-    pass
+    capsule = get_object_or_404(Capsule, pk=pk)
+    hotel_pk = capsule.hotel.pk
+    if request.method == 'POST':
+        capsule.delete()
+        return redirect('hotel_owner:capsule_list', hotel_pk=hotel_pk)
+    return render(request, 'hotel_owner/capsule_confirm_delete.html', {
+        'capsule': capsule,
+    })

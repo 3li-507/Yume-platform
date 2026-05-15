@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if form.instance.pk %}Edit Hotel{% else %}Add Hotel{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-7">
+
+        <h2>
+            {% if form.instance.pk %}
+                Edit Hotel
+            {% else %}
+                Add New Hotel
+            {% endif %}
+        </h2>
+        <hr>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Name -->
+            <div class="mb-3">
+                <label class="form-label">Hotel Name</label>
+                <input type="text" name="name" class="form-control"
+                    value="{{ form.name.value|default:'' }}"
+                    placeholder="Enter hotel name">
+                {% if form.name.errors %}
+                    <div class="text-danger small">{{ form.name.errors }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea name="description" class="form-control" rows="4"
+                    placeholder="Describe your hotel">{{ form.description.value|default:'' }}</textarea>
+                {% if form.description.errors %}
+                    <div class="text-danger small">{{ form.description.errors }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Address -->
+            <div class="mb-3">
+                <label class="form-label">Address</label>
+                <input type="text" name="address" class="form-control"
+                    value="{{ form.address.value|default:'' }}"
+                    placeholder="Enter hotel address">
+                {% if form.address.errors %}
+                    <div class="text-danger small">{{ form.address.errors }}</div>
+                {% endif %}
+            </div>
+
+            <!-- City -->
+            <div class="mb-3">
+                <label class="form-label">City</label>
+                <select name="city" class="form-select">
+                    <option value="">-- Select City --</option>
+                    {% for city in form.city.field.queryset %}
+                    <option value="{{ city.pk }}"
+                        {% if form.city.value == city.pk %}selected{% endif %}>
+                        {{ city.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+                {% if form.city.errors %}
+                    <div class="text-danger small">{{ form.city.errors }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Image -->
+            <div class="mb-3">
+                <label class="form-label">Hotel Image</label>
+                {% if form.instance.image %}
+                    <div class="mb-2">
+                        <img src="{{ form.instance.image.url }}" class="img-thumbnail" style="height: 150px;">
+                    </div>
+                {% endif %}
+                <input type="file" name="image" class="form-control" accept="image/*">
+                {% if form.image.errors %}
+                    <div class="text-danger small">{{ form.image.errors }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-dark">
+                    {% if form.instance.pk %}Save Changes{% else %}Submit for Approval{% endif %}
+                </button>
+                <a href="{% url 'hotel_owner:hotel_pending' %}" class="btn btn-outline-dark">
+                    Cancel
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

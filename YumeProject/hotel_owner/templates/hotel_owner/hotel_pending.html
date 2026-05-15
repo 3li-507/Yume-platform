@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Hotels{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>My Hotels</h2>
+    <a href="{% url 'hotel_owner:hotel_create' %}" class="btn btn-dark">
+        <i class="bi bi-plus-lg"></i> Add Hotel
+    </a>
+</div>
+<hr>
+
+{% for hotel in hotels %}
+<div class="card mb-3">
+    <div class="row g-0">
+        <div class="col-3">
+            <img src="{{ hotel.image.url }}" class="img-fluid rounded-start h-100 object-fit-cover" alt="{{ hotel.name }}">
+        </div>
+        <div class="col-9">
+            <div class="card-body d-flex flex-column justify-content-between h-100">
+                <div>
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="card-title">{{ hotel.name }}</h5>
+                        {% if hotel.is_active %}
+                            <span class="badge bg-success">Approved</span>
+                        {% else %}
+                            <span class="badge bg-warning text-dark">Pending Approval</span>
+                        {% endif %}
+                    </div>
+                    <p class="text-muted mb-1">{{ hotel.city.name }}</p>
+                    <p class="card-text">{{ hotel.description|truncatewords:15 }}</p>
+                    <p class="text-muted">
+                        <i class="bi bi-door-closed"></i>
+                        {{ hotel.capsules.count }} capsules
+                    </p>
+                </div>
+
+                <div class="d-flex gap-2">
+                    {% if hotel.is_active %}
+                    <a href="{% url 'hotel_owner:capsule_list' hotel.pk %}" class="btn btn-dark btn-sm">
+                        <i class="bi bi-grid"></i> Manage Capsules
+                    </a>
+                    {% endif %}
+                    <a href="{% url 'hotel_owner:hotel_update' hotel.pk %}" class="btn btn-outline-dark btn-sm">
+                        <i class="bi bi-pencil"></i> Edit
+                    </a>
+                    <button type="button" class="btn btn-outline-danger btn-sm"
+                        data-bs-toggle="modal"
+                        data-bs-target="#deleteModal{{ hotel.pk }}">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal OUTSIDE the card but INSIDE the loop -->
+<div class="modal fade" id="deleteModal{{ hotel.pk }}" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Hotel</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete <strong>{{ hotel.name }}</strong>?</p>
+                <p class="text-muted small">
+                    <i class="bi bi-exclamation-triangle text-danger"></i>
+                    This will also delete all <strong>{{ hotel.capsules.count }}</strong> capsules.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancel</button>
+                <form method="POST" action="{% url 'hotel_owner:hotel_delete' hotel.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}
