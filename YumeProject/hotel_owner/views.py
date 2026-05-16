@@ -7,9 +7,9 @@ from .forms import CapsuleHotelForm, CapsuleForm
 
 
 
-# @owner_required
-# def owner_view(request):
-#     return HttpResponse("Owner dashboard — coming soon.")
+@owner_required
+def owner_view(request):
+    return HttpResponse("Owner dashboard — coming soon.")
 
 # ── Hotel Views ──
 
