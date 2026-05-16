@@ -5,21 +5,45 @@
 
 {% block content %}
 
+
+<div class="hero-bg">
+    <img src="{% static 'images/ChatGPT Image May 15, 2026, 05_16_34 PM.png' %}"
+     alt="Hero Image"
+
+     class="position-absolute
+            top-50
+            start-50
+            translate-middle
+            opacity-10
+            z-n1"
+
+     style="
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        object-position:center;
+        pointer-events:none;
+        user-select:none;
+        
+     ">
+</div>
 <div class="container py-4">
 
     <!-- HERO SECTION -->
     <section class="overflow-hidden mb-5">
+        <div class="container py-5 text-center position-relative">
 
-        <div class="container-fluid py-5 text-center position-relative">
 
             <div class="py-5">
 
-                <h1 class="display-1 fw-bold">
+                
+
+                <h1 class="display-1 text-light fw-bold">
                     YUME
                 </h1>
 
 
-                <p class="lead opacity-75 mx-auto"
+                <p class="lead opacity-75 text-light mx-auto"
                    style="max-width:800px; line-height:2;">
 
                     Smart capsule hotel booking platform designed
@@ -31,122 +55,212 @@
 
         </div>
 
-        <!-- SEARCH BAR -->
-        <div class="rounded-bottom-5 border-bottom p-4  position-relative">
+        <!-- =========================
+     SEARCH BAR
+========================= -->
 
-            <form>
+<div class="rounded-bottom-5 text-light border-bottom p-4 position-relative">
 
-                <div class="row g-3 align-items-center">
+    <form>
 
-                    <!-- LOCATION -->
-                    <div class="col-lg">
+        <div class="row g-3 align-items-center">
 
-                        <div class="border rounded-4 px-4 py-3 h-100 ">
+            <!-- LOCATION -->
+            <div class="col-lg">
 
-                            <label class="small fw-semibold opacity-75 mb-2 d-block">
-                                Where to?
-                            </label>
+                <div class="border rounded-4 px-4 py-1 h-100">
 
-                            <div class="d-flex align-items-center gap-3">
+                    <label class="small fw-semibold opacity-75 mb-2 d-block">
+                        Where to?
+                    </label>
 
-                                <i class="bi bi-geo-alt fs-5"></i>
+                    <div class="d-flex align-items-center gap-3">
 
-                                <input type="text"
-                                    class="form-control border-0 shadow-none bg-transparent p-0"
-                                    placeholder="Riyadh, Saudi Arabia">
+                        <i class="bi bi-geo-alt fs-5  text-light"></i>
 
-                            </div>
+                        <!-- SEARCHABLE CITY -->
+                        <input type="text"
+                               class="form-control border-0 shadow-none bg-transparent p-0 text-light"
+                               placeholder="Search city..."
+                               list="cities">
 
-                        </div>
+                        <datalist id="cities">
 
-                    </div>
+                            <option value="Riyadh">
+                            <option value="Jeddah">
+                            <option value="Makkah">
+                            <option value="Madinah">
+                            <option value="Dammam">
+                            <option value="Khobar">
+                            <option value="Taif">
+                            <option value="Abha">
 
-                    <!-- DATES -->
-                    <div class="col-lg">
-
-                        <div class="border rounded-4 px-4 py-3 h-100 ">
-
-                            <label class="small fw-semibold opacity-75 mb-2 d-block">
-                                Dates
-                            </label>
-
-                            <div class="d-flex align-items-center gap-3">
-
-                                <i class="bi bi-calendar3 fs-5"></i>
-
-                                <input type="date"
-                                    class="form-control border-0 shadow-none bg-transparent p-0">
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <!-- TRAVELERS -->
-                    <div class="col-lg">
-
-                        <div class="border rounded-4 px-4 py-3 h-100 ">
-
-                            <label class="small fw-semibold opacity-75 mb-2 d-block">
-                                Travelers
-                            </label>
-
-                            <div class="d-flex align-items-center gap-3">
-
-                                <i class="bi bi-people fs-5"></i>
-
-                                <select class="form-select border-0 shadow-none p-0">
-
-                                    <option selected>
-                                        2 Travelers, 1 Room
-                                    </option>
-
-                                    <option>
-                                        1 Traveler, 1 Room
-                                    </option>
-
-                                    <option>
-                                        2 Travelers, 1 Room
-                                    </option>
-
-                                    <option>
-                                        3 Travelers, 2 Rooms
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <!-- SEARCH BUTTON -->
-                    <div class="col-lg-auto">
-
-                        <button type="submit"
-                                class="btn btn-dark rounded-4 px-4 py-3 d-flex align-items-center justify-content-center"
-                                style="width:65px; height:65px;">
-
-                            <i class="bi bi-search fs-5"></i>
-
-                        </button>
+                        </datalist>
 
                     </div>
 
                 </div>
 
-            </form>
+            </div>
+
+            <!-- DATE RANGE -->
+            <div class="col-lg">
+
+                <div class="border rounded-4  px-4 py-1 h-100">
+
+                    <label class="small fw-semibold opacity-75 mb-2 d-block">
+                        Dates
+                    </label>
+
+                    <div class="d-flex align-items-center gap-3">
+
+                        <i class="bi bi-calendar3 fs-5  text-light"></i>
+
+                        <!-- DATE PICKER -->
+                        <input type="text"
+                               id="datePicker"
+                               class="form-control border-0 shadow-none bg-transparent p-0 text-light"
+                               placeholder="Check-in — Check-out">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- CAPSULES -->
+            <div class="col-lg">
+
+                <div class="border rounded-4 px-4 py-1 h-100">
+
+                    <label class="small fw-semibold opacity-75 d-block">
+                        Capsules
+                    </label>
+
+                    <div class="d-flex align-items-center justify-content-between">
+
+                        <div class="d-flex align-items-center gap-3">
+
+                            <i class="bi bi-door-closed fs-5  text-light"></i>
+
+                            <span id="capsuleCount">
+                                1 Capsule
+                            </span>
+
+                        </div>
+
+                        <!-- COUNTER -->
+                        <div class="d-flex align-items-center gap-2">
+
+                            <button type="button"
+                                    class="btn border-0 bg-transparent px-3 py-2"
+                                    onclick="decreaseCapsule()">
+
+                                <i class="bi bi-dash-circle text-light"></i>
+
+                            </button>
+
+                            <button type="button"
+                                    class="btn border-0 bg-transparent px-3 py-2"
+                                    onclick="increaseCapsule()">
+
+                                <i class="bi bi-plus-circle text-light"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- SEARCH -->
+            <div class="col-lg-auto">
+
+                <button type="submit"
+                        class="btn rounded-circle bg-dark px-4 py-4 d-flex align-items-center justify-content-center"
+                        style="width:65px; height:65px;">
+
+                    <i class="bi bi-search fs-5  text-light"></i>
+
+                </button>
+
+            </div>
 
         </div>
+
+    </form>
+
+</div>
+
+
+
+<!-- =========================
+     FLATPICKR
+========================= -->
+
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+      <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
+
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+
+    // DATE RANGE PICKER
+    flatpickr("#datePicker", {
+
+        mode: "range",
+
+        minDate: "today",
+
+        dateFormat: "Y-m-d",
+
+    });
+
+
+
+    // CAPSULE COUNTER
+    let capsuleCount = 1;
+
+    function increaseCapsule() {
+
+        capsuleCount++;
+
+        updateCapsule();
+
+    }
+
+    function decreaseCapsule() {
+
+        if (capsuleCount > 1) {
+
+            capsuleCount--;
+
+            updateCapsule();
+
+        }
+
+    }
+
+    function updateCapsule() {
+
+        document.getElementById("capsuleCount").innerText =
+            capsuleCount + (capsuleCount > 1 ? " Capsules" : " Capsule");
+
+    }
+
+</script>
 
     </section>
 
     <!-- FEATURED CAPSULES -->
     <section class="mb-5">
 
-        <div class="text-center mb-5">
+        <div class="text-center text-light mb-5 pt-4">
 
             <h2 class="display-6 fw-bold">
                 Featured Capsules
@@ -322,7 +436,7 @@
                     <div class="d-flex align-items-center justify-content-center h-100 py-5">
 
                         <a href="#"
-                           class="text-decoration-none fs-3 fw-semibold">
+                           class="text-decoration-none text-dark fs-3 fw-semibold">
 
                             Read More →
 
