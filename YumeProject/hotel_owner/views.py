@@ -128,6 +128,6 @@ def capsule_delete(request, pk):
     if request.method == 'POST':
         capsule.delete()
         return redirect('hotel_owner:capsule_list', hotel_pk=hotel_pk)
-    return render(request, 'hotel_owner/capsule_confirm_delete.html', {
+    return render(request, 'hotel_owner/capsule_list.html', {
         'capsule': capsule,
     })
