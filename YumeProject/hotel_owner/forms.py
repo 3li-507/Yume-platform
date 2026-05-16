@@ -1,5 +1,5 @@
 from django import forms
-from .models import CapsuleHotel, Capsule, City
+from hotels.models import CapsuleHotel, Capsule, City
 
 
 class CapsuleHotelForm(forms.ModelForm):
