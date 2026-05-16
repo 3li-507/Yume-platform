@@ -186,12 +186,28 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for city in cities %}
+                                <tr>
+                                    <td class="text-muted small">{{ forloop.counter }}</td>
+                                    <td>{{ city.name }}</td>
+                                    <td>{{ city.hotels.count }}</td>
+                                    <td>
+                                        {% if city.is_active %}
+                                            <span class="badge bg-success">Active</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">Inactive</span>
+                                        {% endif %}
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                {% empty %}
                                 <tr>
                                     <td colspan="5" class="text-center text-muted py-5">
                                         <i class="bi bi-geo-alt" style="font-size:2rem;"></i>
                                         <p class="mt-2 mb-0 small">No cities added</p>
                                     </td>
                                 </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -288,7 +304,7 @@
  <div class="modal fade" id="addCityModal" tabindex="-1" aria-labelledby="addCityModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form method="post" action="#" class="d-flex flex-column gap-2">
+      <form method="post" action="{% url 'administration:add_city' %}" class="d-flex flex-column gap-2">
         {% csrf_token %}
         <div class="modal-header">
           <h5 class="modal-title" id="addCityModalLabel">Add New City</h5>
