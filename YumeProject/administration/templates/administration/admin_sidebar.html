@@ -9,33 +9,44 @@
         <nav class="nav nav-pills flex-column gap-1 p-2 flex-grow-1">
 
             <span class="px-2 py-1 small text-muted text-uppercase" style="font-size:.7rem;">Overview</span>
-            <a href="#" class="nav-link active d-flex align-items-center gap-2" id="dashboard-tab" data-bs-toggle="tab" data-bs-target="#dashboard" type="button" role="tab">
+            <a href="{% url 'administration:admin_view' %}"
+               class="nav-link d-flex align-items-center gap-2 {% if request.resolver_match.url_name == 'admin_view' %}active{% endif %}"
+               data-bs-toggle="tab" data-bs-target="#dashboard" role="tab">
                 <i class="bi bi-speedometer2"></i> Dashboard
             </a>
 
             <span class="px-2 pt-3 pb-1 small text-muted text-uppercase" style="font-size:.7rem;">Hotels</span>
-            <a href="#" class="nav-link d-flex align-items-center gap-2" id="requests-tab" data-bs-toggle="tab" data-bs-target="#requests" type="button" role="tab">
+            <a href="#requests"
+               class="nav-link d-flex align-items-center gap-2"
+               data-bs-toggle="tab" data-bs-target="#requests" role="tab">
                 <i class="bi bi-hourglass-split"></i> Pending Requests
             </a>
-            <a href="#" class="nav-link d-flex align-items-center gap-2">
+            <a href="#approved-hotels"
+               class="nav-link d-flex align-items-center gap-2"
+               data-bs-toggle="tab" data-bs-target="#approved-hotels" role="tab">
                 <i class="bi bi-building-check"></i> Approved Hotels
             </a>
 
-            <!-- NOTE: as mercy on the server, users will not be loaded in in dashboard-->
             <span class="px-2 pt-3 pb-1 small text-muted text-uppercase" style="font-size:.7rem;">Users</span>
-            <a href="#" class="nav-link d-flex align-items-center gap-2">
+            <a href="#all-users"
+               class="nav-link d-flex align-items-center gap-2"
+               data-bs-toggle="tab" data-bs-target="#all-users" role="tab">
                 <i class="bi bi-people"></i> All Users
             </a>
-            <a href="#" class="nav-link d-flex align-items-center gap-2">
+            <a href="#owners"
+               class="nav-link d-flex align-items-center gap-2"
+               data-bs-toggle="tab" data-bs-target="#owners" role="tab">
                 <i class="bi bi-person-badge"></i> Owners
             </a>
 
             <span class="px-2 pt-3 pb-1 small text-muted text-uppercase" style="font-size:.7rem;">System</span>
-            <a href="#" class="nav-link d-flex align-items-center gap-2">
+            <a href="#cities"
+               class="nav-link d-flex align-items-center gap-2"
+               data-bs-toggle="tab" data-bs-target="#cities" role="tab">
                 <i class="bi bi-geo-alt"></i> Cities
             </a>
             <a href="{% url 'admin:index' %}" class="nav-link d-flex align-items-center gap-2">
-                <i class="bi bi-terminal"></i> Django Admin
+                <i class="bi bi-terminal"></i> Advanced Admin
             </a>
 
         </nav>

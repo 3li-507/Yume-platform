@@ -1,21 +1,28 @@
-from django.http import HttpResponse
 from accounts.decorators import admin_role_required
-from django.shortcuts import render
-from hotels.models import CapsuleHotel, Capsule
+from django.contrib.auth import get_user_model
+from django.shortcuts import render, get_object_or_404, redirect
+from hotels.models import CapsuleHotel, City
+from accounts.models import OwnerProfile
 
-# Create your views here.
+User = get_user_model()
 
 
 @admin_role_required
 def admin_view(request):
-    context ={
-        #'pending_hotels': CapsuleHotel.objects.filter(status=CapsuleHotel.STATUS_PENDING).select_related('hotel_owner__user', 'city'),
-#        'approved_hotels': CapsuleHotel.objects.filter(status=CapsuleHotel.STATUS_APPROVED).select_related('hotel_owner__user', 'city'),
-
-        'pending_hotels': CapsuleHotel.objects.select_related('hotel_owner__user', 'city'),
-        
-
+    context = {
+        'pending_hotels':  CapsuleHotel.objects.filter(is_active=False).select_related('hotel_owner', 'city'),
+        'approved_hotels': CapsuleHotel.objects.filter(is_active=True).select_related('hotel_owner', 'city'),
+        'all_users':       User.objects.all().order_by('date_joined'),
+        'owners':          OwnerProfile.objects.all().select_related('user'),
+        'cities':          City.objects.all(),
     }
-    return render(request, 'administration/dashboard.html')
+    return render(request, 'administration/dashboard.html', context)
 
 
+@admin_role_required
+def toggle_hotel(request, hotel_id):
+    if request.method == 'POST':
+        hotel = get_object_or_404(CapsuleHotel, pk=hotel_id)
+        hotel.is_active = not hotel.is_active
+        hotel.save()
+    return redirect('administration:admin_view')
