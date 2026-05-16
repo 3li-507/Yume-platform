@@ -8,7 +8,7 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>My Hotels</h2>
     <a href="{% url 'hotel_owner:hotel_create' %}" class="btn btn-dark">
-        <i class="bi bi-plus-lg"></i> Add Hotel
+        <i class="bi bi-plus-lg text-light"></i> Add Hotel
     </a>
 </div>
 <hr>
@@ -41,7 +41,7 @@
                 <div class="d-flex gap-2">
                     {% if hotel.is_active %}
                     <a href="{% url 'hotel_owner:capsule_list' hotel.pk %}" class="btn btn-dark btn-sm">
-                        <i class="bi bi-grid"></i> Manage Capsules
+                        <i class="bi bi-grid text-light"></i> Manage Capsules
                     </a>
                     {% endif %}
                     <a href="{% url 'hotel_owner:hotel_update' hotel.pk %}" class="btn btn-outline-dark btn-sm">
